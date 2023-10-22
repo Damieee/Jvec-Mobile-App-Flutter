@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FastLink hotspot - Log in</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- two other colors
+
+<body class="lite">
+<body class="dark">
+
+-->
+
+
+    <form name="sendin" action="http://wifi.usefastlink.com/login" method="post" style="display:none">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <!-- <input type="hidden" name="dst" value="https://usefastlink.com" /> -->
+        <input type="hidden" name="dst" value="https://usefastlink.com" />
+        <input type="hidden" name="popup" value="false" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+        function doLogin() {
+            document.sendin.username.value = document.login.username.value;
+            document.sendin.password.value = hexMD5('\135' + document.login.password.value + '\012\144\124\043\103\240\204\276\116\251\137\125\343\334\102\120');
+            document.sendin.submit();
+
+            // Store the username and password in localStorage if "Remember Me" is checked
+            if (document.login.rememberMe.checked) {
+                localStorage.setItem('username', document.login.username.value);
+                localStorage.setItem('password', document.login.password.value);
+                console.log('Saved ' + document.login.username.value + ' ' + document.login.password.value)
+            } else {
+                // If "Remember Me" is not checked, remove any previously stored values
+                localStorage.removeItem('username');
+                localStorage.removeItem('password');
+            }
+
+            return false;
+        }
+
+    </script>
+    <div class="ie-fixMinHeight">
+        <div class="main">
+            <div class="wrap animated fadeIn">
+                <form name="login" action="http://wifi.usefastlink.com/login" method="post" onSubmit="return doLogin()">
+                    <!-- <input type="hidden" name="dst" value="https://usefastlink.com" /> -->
+                    <input type="hidden" name="dst" value="https://usefastlink.com" />
+                    <input type="hidden" name="popup" value="false" />
+                    <img src="img/fastlink_logo_black.png" alt="fastlink-logo"
+                        style="height: auto; width: 200px; display: block; margin: 0 auto; padding: 30px" />
+
+                    <p class="info alert">
+
+                        Sorry... you have used all your data allowance </p>
+                    <label>
+                        <img class="ico" src="img/user.svg" alt="#" />
+                        <input name="username" type="text" value="avan@gmail.com"
+                            placeholder="Username or Email address" />
+                    </label>
+
+                    <label>
+                        <img class="ico" src="img/password.svg" alt="#" />
+                        <input name="password" type="password" placeholder="Password" style="margin-bottom: 10px;" />
+                    </label>
+
+                    <!-- Add the "Remember Me" checkbox -->
+                    <label>
+                        <input type="checkbox" id="checkbox" name="rememberMe" checked="true" /> Remember Me
+                    </label>
+
+                    <input type="submit" value="Connect" style="margin-top: 20px" />
+                    <!-- <input type="register" value="Register"> </input> -->
+
+                    <button class="register-button">
+                        <a href="https://portal.usefastlink.com/#/signup"
+                            style="display: block; color:#E0371D; text-decoration: none">Register</a></button>
+                </form>
+
+                <footer>
+                    <a href="/buy-data.html">Buy or Claim Free Data</a>
+                </footer>
+                <footer style="margin-top: 5px;">
+                    <a
+                        href="https://seyipaye.notion.site/FastLink-Data-Plan-eb10d6cf7ada447390f8023024b3c192">Pricing</a>
+                    <a href="https://portal.usefastlink.com/#/home">User Portal</a>
+                    <a href="sms:2348168706767">Contact us</a>
+                </footer>
+
+                <!-- <button style="
+                              width: 100%;
+                              height: 44px;
+                              border-radius: 8px;
+                              outline: none;
+                              border: none;
+                            ">
+                    <a href="http://178.79.149.74/login/bootstrap5/index.html?dynamic_id=20&i18n=en_GB#" style="display: block; text-decoration: none">Sign Up</a>
+                </button> -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
